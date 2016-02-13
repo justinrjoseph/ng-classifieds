@@ -1,0 +1,41 @@
+<md-toolbar>
+	<div class="md-toolbar-tools">
+		<p><strong><a href="#/classifieds">ngClassifieds</a></strong></p>
+
+		<md-button ng-click="vm.openSidebar()">
+			<md-icon class="mdi mdi-plus-circle"></md-icon>
+			New Classified
+		</md-button>
+
+		<md-button ng-click="showFilters = true">
+			<md-icon class="mdi mdi-magnify"></md-icon>
+			Filters
+		</md-button>
+	</div><!-- /.md-toolbar-tools -->
+</md-toolbar>
+
+<div class="filters" layout="row" layout-align="center center" ng-show="showFilters">
+
+	<md-input-container>
+		<label for="criteria">Filter Criteria</label>
+		<input type="text" id="criteria" ng-model="classifiedsFilter">
+	</md-input-container>
+
+	<md-input-container>
+		<label>Category</label>
+		<md-select ng-model="category">
+			<md-option ng-repeat="category in vm.categories" value="{{ category }}">{{ category }}</md-option>
+		</md-select>
+	</md-input-container>
+
+	<md-input-container>
+		<md-button class="md-warn" ng-click="classifiedsFilter = ''; category = ''">Clear</md-button><!-- /.md-warn -->
+	</md-input-container>
+
+</div><!-- /.filters -->
+
+<ui-view></ui-view>
+
+<md-content>
+	<classified-card class="md-padding" layout="row" layout-wrap classifieds="vm.classifieds" classifieds-filter=" classifiedsFilter" category="category"></classified-card>
+</md-content>
